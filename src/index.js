@@ -4,62 +4,92 @@ import "./index.css";
 
 //
 
-class App extends React.Component {
-    render() {
-        return (
-            <div className="app">
-                <form action="" method="POST">
-                    <input name="nome" type="text"/><br/>
-                    <input name="email" type="email"/><br/>
-                    <input name="senha" type="password"/><br/>
-                    <input name="conf_senha" type="password"/><br/>
-                    <input name="cpf" type="number"/><br/><br/>
-
-                    <input type="submit" value="Cadastrar"/>
-                </form>
-
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Cadastro de usuário</h3>
-                    </div>
-                    <form>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">File input</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile"/>
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
+class UserForm extends React.Component {
+  render() {
+    return (
+      <div className="app">
+        <div class="register-box" id="form">
+          <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+              <a href="" class="h1">
+                <b>LOGO</b>
+              </a>
             </div>
-        );
-    }
+            <div class="card-body">
+              <p class="login-box-msg">Cadastrar novo usuário</p>
+              <form action="" method="">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" required placeholder="Nome completo"/>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span>
+                            <i class="gg-user"></i>
+                        </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="email" class="form-control" required placeholder="exemplo@mail.com"/>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span>
+                            <i class="gg-mail"></i>
+                        </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" minLength="14" maxLength="14" pro required placeholder="xxx.xxx.xxx-xx"/>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span>
+                            <i class="gg-info"></i>
+                        </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="password" class="form-control" minLength="8" required placeholder="Senha"/>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span>
+                            <i class="gg-lock"></i>
+                        </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="password" class="form-control" minLength="8" required placeholder="Confirme senha"/>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span>
+                            <i class="gg-lock"></i>
+                        </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">
+                      Register
+                    </button>
+                  </div>
+                  <div class="col-8">
+                    <button type="submit" class="btn btn-default float-right">
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 //
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App/>);
+root.render(<UserForm />);

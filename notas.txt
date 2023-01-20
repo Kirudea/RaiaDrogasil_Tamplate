@@ -1,0 +1,3 @@
+senhas devem ser iguais
+logo
+cancelar tamanho diferente
