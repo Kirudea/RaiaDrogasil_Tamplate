@@ -1,10 +1,27 @@
-senhas devem ser iguais
-logo
-cancelar tamanho diferente
+---
+Fazer/Concertar
+---
+
+Notificar do . necessario no email
+Redirecionar em caso de sucesso
+Notificação em pop-up
+Aplicar fluedez nos icones ou trocar
+
+state é o JSON!
+Email existente?
+CPF existente? OU deixa pro back?
+
+---
+GIT
+---
 
 git config --get user.name
 git config user.name "Kirudea"
 git config user.email kilderehenriquedp@gmail.com
+
+---
+FORM
+---
 
 User
     nome
@@ -13,10 +30,16 @@ User
     confirm_senha
     cpf
     
-    cliente_id???
+    cliente_id -> cnpj, token???
+
+---
+CSS
+---
 
 Background-color: #eef5f9
 .content-wrapper
+form-control is-invalid
+form-control is-valid
 
 ---
 REQUISITOS
