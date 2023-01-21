@@ -3,6 +3,7 @@ Fazer/Concertar
 ---
 
 Notificar do . necessario no email
+Notificar do conf_senha diferente
 Redirecionar em caso de sucesso
 Notificação em pop-up
 Aplicar fluedez nos icones ou trocar
