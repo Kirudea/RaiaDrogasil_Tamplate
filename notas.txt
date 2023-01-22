@@ -7,6 +7,7 @@ Notificar do conf_senha diferente
 Redirecionar em caso de sucesso
 Notificação em pop-up
 Aplicar fluedez nos icones ou trocar
+Logo nao exibindo
 
 state é o JSON!
 Email existente?

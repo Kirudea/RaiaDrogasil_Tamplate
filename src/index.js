@@ -36,10 +36,10 @@ function ValidarEmail(email){
       email = email[1].split(".");
 
       if(email.length > 1){
-        if(email[0].length > 0 & email[1].length > 1){
+        if(email[0].length > 0 & (email[1].length === 2 | email[1].length === 3)){
          return null;
         }else
-          resp = "O email deve conter ao menos 1 caractere antes e 2 depois do \".\".";
+          resp = "O email deve conter ao menos 1 caractere antes e 2 ou 3 depois do \".\".";
       }else
         resp = "O email deve conter ao menos um \".\" após o \"@\".";
     }else
@@ -71,49 +71,45 @@ class UserForm extends React.Component {
   }
 
   handleChange(event) {
-    var invalido = false;
     switch(event.target.name) {
       case "nome":
         event.target.value = event.target.value.trimStart();
-        invalido = event.target.value === "" | event.target.value == null;
+        this.setInvalidCSS(event.target.id, event.target.value === "" | event.target.value == null);
         break;
       
       case "cpf":
         event.target.value = FormatCPF(event.target.value);
-        invalido = event.target.value.length !== 14
+        this.setInvalidCSS(event.target.id, event.target.value.length !== 14);
         break;
       
       case "email":
-        invalido = ValidarEmail(event.target.value) !== null;  
+        this.setInvalidCSS(event.target.id, ValidarEmail(event.target.value) !== null);  
         break
 
       case "senha":
       case "conf_senha":
         event.target.value = event.target.value.trim();
-        invalido = event.target.value.length < 8;
+        this.setInvalidCSS(event.target.id, event.target.value.length < 8);
         this.setInvalidCSS("conf_senha", event.target.value !== this.state.senha & event.target.value !== this.state.conf_senha);
         break
         
       default:
     }
 
-    this.setInvalidCSS(event.target.id, invalido);
     this.setState({[event.target.name]: event.target.value});
   }
 
   handleSubmit() {
-    //state é o JSON!
-    //Email existente?
-    //CPF existente? OU deixa pro back?
-    alert(
-      this.state.nome.trim() + "\n" + 
-      this.state.email.trim() + "\n" + 
-      this.state.cpf.trim() + "\n" + 
-      this.state.senha.trim() + "\n" + 
-      this.state.conf_senha.trim()
-    );
+    //state em JSON
+    var json = {};
+    for(const [key, value] of Object.entries(this.state)) {
+      json["\""+key+"\""] = value.trim();
+    }
 
-    //alert(JSON.stringify(this.state));
+    console.log(json);
+    
+    alert("Usuário , "+this.state.nome+", criado com sucesso!")
+    alert("Erro ao criar conta!")
   }
 
   render() {
@@ -133,7 +129,7 @@ class UserForm extends React.Component {
               <p class="login-box-msg"><b>Cadastrar novo usuário</b></p>
               <form onSubmit={this.handleSubmit} autoComplete="on" /*method="POST"*/>
                 <div class="input-group mb-3">
-                  <InputForm type="text" name="nome" id="nome" placeholder="Nome completo" onChange={(e) => this.handleChange(e)}/>
+                  <InputForm type="text" name="nome" id="nome" pattern="[a-zA-Z\s]+" placeholder="Nome completo" onChange={(e) => this.handleChange(e)}/>
                   <div class="input-group-append">
                     <div class="input-group-text">
                         <span>
@@ -163,7 +159,7 @@ class UserForm extends React.Component {
                   </div>
                 </div>
                 <div class="input-group mb-3">
-                  <InputForm type="password" name="senha" id="senha" placeholder="Senha" minLength="8" onChange={(e) => this.handleChange(e)}/>
+                  <InputForm type="password" name="senha" id="senha" minLength="8" pattern=".{8,}" placeholder="Senha" onChange={(e) => this.handleChange(e)}/>
                   <div class="input-group-append">
                     <div class="input-group-text">
                         <span>
@@ -173,7 +169,7 @@ class UserForm extends React.Component {
                   </div>
                 </div>
                 <div class="input-group mb-3">
-                  <InputForm type="password" name="conf_senha" id="conf_senha" placeholder="Confirme senha" minLength="8" onChange={(e) => this.handleChange(e)}/>
+                  <InputForm type="password" name="conf_senha" id="conf_senha" minLength="8" pattern=".{8,}" placeholder="Confirme senha" onChange={(e) => this.handleChange(e)}/>
                   <div class="input-group-append">
                     <div class="input-group-text">
                         <span>
