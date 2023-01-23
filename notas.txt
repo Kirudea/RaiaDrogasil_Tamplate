@@ -7,10 +7,6 @@ Fazer/Concertar
     Aplicar fluedez nos icones ou trocar
     Logo nao exibindo
 
-    state é o JSON!
-    Email existente?
-    CPF existente? OU deixa pro back?
-
 ---
 GIT
 
