@@ -1,72 +1,112 @@
 ---
 Fazer/Concertar
----
 
-Notificar do . necessario no email
-Notificar do conf_senha diferente
-Redirecionar em caso de sucesso
-Notificação em pop-up
-Aplicar fluedez nos icones ou trocar
-Logo nao exibindo
+    Notificar do . necessario no email
+    Notificar do conf_senha diferente
+    Notificação em pop-up
+    Aplicar fluedez nos icones ou trocar
+    Logo nao exibindo
 
-state é o JSON!
-Email existente?
-CPF existente? OU deixa pro back?
+    state é o JSON!
+    Email existente?
+    CPF existente? OU deixa pro back?
 
 ---
 GIT
----
 
-git config --get user.name
-git config user.name "Kirudea"
-git config user.email kilderehenriquedp@gmail.com
+    git config --get user.name
+    git config user.name "Kirudea"
+    git config user.email kilderehenriquedp@gmail.com
 
 ---
 FORM
----
 
-User
-    nome
-    email
-    senha
-    confirm_senha
-    cpf
+    User
+        nome
+        email
+        senha
+        confirm_senha
+        cpf
     
     cliente_id -> cnpj, token???
 
 ---
 CSS
----
 
-Background-color: #eef5f9
-.content-wrapper
-form-control is-invalid
-form-control is-valid
+    Background-color: #eef5f9
+    .content-wrapper
+    form-control is-invalid
+    form-control is-valid
 
 ---
 REQUISITOS
----
 
-1. Utilizar framework react.
-2. Validação de CPF;
-3. Validação de e-mail;
-4. Validação de campos obrigatórios;
+    1. Utilizar framework react.
+    2. Validação de CPF;
+    3. Validação de e-mail;
+    4. Validação de campos obrigatórios;
 
 ---
 MODELO TABELA
----
 
-CREATE TABLE `vfp_usuario` (
-`id` bigint(20) NOT NULL AUTO_INCREMENT,
-`nome` varchar(255) NOT NULL,
-`email` varchar(50) NOT NULL,
-`senha` varchar(20) NOT NULL,
-`cpf` varchar(20) NOT NULL,
-`cliente_id` bigint(20) NOT NULL,
-`created_at` datetime DEFAULT NULL,
-`updated_at` datetime DEFAULT NULL,
-`excluded` tinyint(1) DEFAULT '0',
-PRIMARY KEY (`id`),
-KEY `key_usuario_cliente_id` (`cliente_id`),
-CONSTRAINT `key_usuario_cliente_id` FOREIGN KEY (`cliente_id`) REFERENCES `cmf_cliente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+    CREATE TABLE `vfp_usuario` (
+        `id` bigint(20) NOT NULL AUTO_INCREMENT,
+        `nome` varchar(255) NOT NULL,
+        `email` varchar(50) NOT NULL,
+        `senha` varchar(20) NOT NULL,
+        `cpf` varchar(20) NOT NULL,
+        `cliente_id` bigint(20) NOT NULL,
+        `created_at` datetime DEFAULT NULL,
+        `updated_at` datetime DEFAULT NULL,
+        `excluded` tinyint(1) DEFAULT '0',
+        PRIMARY KEY (`id`),
+        KEY `key_usuario_cliente_id` (`cliente_id`),
+        CONSTRAINT `key_usuario_cliente_id` FOREIGN KEY (`cliente_id`) REFERENCES `cmf_cliente` (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+
+---
+CÓDIGOS
+
+PRINT state em JSON
+    var json = {};
+    for(const [key, value] of Object.entries(this.state))
+        json["\""+key+"\""] = value.trim();
+    console.log(json);
+
+ALIDAÇÕES
+    var msg = null;
+
+        if(this.state.senha === this.state.conf_senha) {
+        var formValido = true; // Substituir por response do server;   
+        
+        if(formValido)
+            alert("Usuário , "+this.state.nome+", criado com sucesso!")
+            // Ação redirect
+        else
+            msg = "Erro ao criar conta!"; // OU RESPONSE ERROR
+        }else
+        msg = "Senhas digitadas são diferentes!";
+
+VALIDAR EMAIL
+    function ValidarEmail(email){
+    var resp = "";
+    email = email.split("@");
+
+    if(email.length === 2){
+        if(email[0].length > 0 & email[1].length > 0){
+        email = email[1].split(".");
+
+        if(email.length > 1){
+            if(email[0].length > 0 & (email[1].length === 2 | email[1].length === 3)){
+            return null;
+            }else
+            resp = "O email deve conter ao menos 1 caractere antes e 2 ou 3 depois do \".\".";
+        }else
+            resp = "O email deve conter ao menos um \".\" após o \"@\".";
+        }else
+        resp = "O email deve conter algo antes e depois do \"@\".";
+    }else
+        resp = "O email deve conter um \"@\".";
+    
+    return resp;
+    }

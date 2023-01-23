@@ -11,43 +11,16 @@ function InputForm(props) {
 }
 
 function FormatCPF(cpf) {
-    var accept_chars = /[^0-9]/gi; //Somente nums
-    cpf = cpf.replace(accept_chars, "");
-    
-    if(cpf.length > 3){
-      cpf = cpf.substring(0, 3)+"."+cpf.substring(3);
-    }
-    if(cpf.length > 7){
-      cpf = cpf.substring(0, 7)+"."+cpf.substring(7);
-    }
-    if(cpf.length > 11){
-      cpf = cpf.substring(0, 11)+"-"+cpf.substring(11);
-    }
-
-    return cpf;
-}
-
-function ValidarEmail(email){
-  var resp = "";
-  email = email.split("@");
-
-  if(email.length === 2){
-    if(email[0].length > 0 & email[1].length > 0){
-      email = email[1].split(".");
-
-      if(email.length > 1){
-        if(email[0].length > 0 & (email[1].length === 2 | email[1].length === 3)){
-         return null;
-        }else
-          resp = "O email deve conter ao menos 1 caractere antes e 2 ou 3 depois do \".\".";
-      }else
-        resp = "O email deve conter ao menos um \".\" após o \"@\".";
-    }else
-      resp = "O email deve conter algo antes e depois do \"@\".";
-  }else
-    resp = "O email deve conter um \"@\".";
+  cpf = cpf.substring(0, 14).replace(/[^0-9]/gi, "")
   
-  return resp;
+  if(cpf.length > 3)
+    cpf = cpf.substring(0, 3)+"."+cpf.substring(3);
+  if(cpf.length > 7)
+    cpf = cpf.substring(0, 7)+"."+cpf.substring(7);
+  if(cpf.length > 11)
+    cpf = cpf.substring(0, 11)+"-"+cpf.substring(11);
+
+  return cpf;
 }
 
 class UserForm extends React.Component {
@@ -70,21 +43,27 @@ class UserForm extends React.Component {
     document.getElementById(componenteId).className = "form-control is-"+(invalido?"in":"")+"valid";
   }
 
+  cleanInvalidCSS(event){
+    Object.keys(this.state).forEach(key => {
+      document.getElementById(key).className = "form-control";
+    });
+  }
+
   handleChange(event) {
     switch(event.target.name) {
-      case "nome":
-        event.target.value = event.target.value.trimStart();
-        this.setInvalidCSS(event.target.id, event.target.value === "" | event.target.value == null);
+      case "nome": 
+        event.target.value = event.target.value.trimStart();               
+        this.setInvalidCSS(event.target.id, /^$|[^a-zA-Z\s]+/.test(event.target.value));
         break;
+
+      case "email":
+        this.setInvalidCSS(event.target.id, !/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(event.target.value));  
+        break
       
       case "cpf":
         event.target.value = FormatCPF(event.target.value);
-        this.setInvalidCSS(event.target.id, event.target.value.length !== 14);
+        this.setInvalidCSS(event.target.id, !/\d{3}.\d{3}.\d{3}-\d{2}/.test(event.target.value));
         break;
-      
-      case "email":
-        this.setInvalidCSS(event.target.id, ValidarEmail(event.target.value) !== null);  
-        break
 
       case "senha":
       case "conf_senha":
@@ -99,17 +78,11 @@ class UserForm extends React.Component {
     this.setState({[event.target.name]: event.target.value});
   }
 
-  handleSubmit() {
-    //state em JSON
-    var json = {};
-    for(const [key, value] of Object.entries(this.state)) {
-      json["\""+key+"\""] = value.trim();
+  handleSubmit(event) {
+    if(this.state.senha === this.state.conf_senha){
+      event.preventDefault();
+      alert("Senhas digitadas são diferentes!");
     }
-
-    console.log(json);
-    
-    alert("Usuário , "+this.state.nome+", criado com sucesso!")
-    alert("Erro ao criar conta!")
   }
 
   render() {
@@ -127,7 +100,7 @@ class UserForm extends React.Component {
             </div>
             <div class="card-body">
               <p class="login-box-msg"><b>Cadastrar novo usuário</b></p>
-              <form onSubmit={this.handleSubmit} autoComplete="on" /*method="POST"*/>
+              <form onSubmit={(e) => this.handleSubmit(e)} onReset={(e) => this.cleanInvalidCSS(e)} autoComplete="on" /*method="POST"*/>
                 <div class="input-group mb-3">
                   <InputForm type="text" name="nome" id="nome" pattern="[a-zA-Z\s]+" placeholder="Nome completo" onChange={(e) => this.handleChange(e)}/>
                   <div class="input-group-append">
@@ -188,9 +161,9 @@ class UserForm extends React.Component {
                   </div>
                   <div class="col-6">
                     <div class="col-10 float-right">
-                      <a href="/" class="btn btn-default btn-block">
-                        Cancelar
-                      </a>
+                      <button type="reset" class="btn btn-default btn-block">
+                        Limpar
+                      </button>
                     </div>
                   </div>
                 </div>
