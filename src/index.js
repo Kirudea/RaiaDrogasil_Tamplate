@@ -79,7 +79,7 @@ class UserForm extends React.Component {
   }
 
   handleSubmit(event) {
-    if(this.state.senha === this.state.conf_senha){
+    if(this.state.senha !== this.state.conf_senha){
       event.preventDefault();
       alert("Senhas digitadas são diferentes!");
     }
