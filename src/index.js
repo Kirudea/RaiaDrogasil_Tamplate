@@ -1,4 +1,3 @@
-//NOVO
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -43,7 +42,7 @@ class UserForm extends React.Component {
     document.getElementById(componenteId).className = "form-control is-"+(invalido?"in":"")+"valid";
   }
 
-  cleanInvalidCSS(event){
+  cleanInvalidCSS(){
     Object.keys(this.state).forEach(key => {
       document.getElementById(key).className = "form-control";
     });
@@ -118,7 +117,7 @@ class UserForm extends React.Component {
               </div>
               <div class="card-body">
                 <p class="login-box-msg"><b>Cadastrar novo usuário</b></p>
-                <form action="#senha" onSubmit={(e) => this.handleSubmit(e)} onReset={(e) => this.cleanInvalidCSS(e)} autoComplete="on" /*method="POST"*/>
+                <form action="#senha" onSubmit={(e) => this.handleSubmit(e)} onReset={() => this.cleanInvalidCSS()} autoComplete="on" /*method="POST"*/>
                   <div class="input-group mb-3">
                     <InputForm type="text" name="nome" id="nome" pattern="[a-zA-Z\s]+" placeholder="Nome completo" onChange={(e) => this.handleChange(e)}/>
                     <div class="input-group-append">

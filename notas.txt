@@ -5,7 +5,6 @@ Fazer/Concertar
     Notificar do conf_senha diferente
     Notificação em pop-up
     Aplicar fluedez nos icones ou trocar
-    Logo nao exibindo
 
 ---
 GIT
