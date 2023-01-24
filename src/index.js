@@ -5,7 +5,7 @@ import "./index.css";
 function InputForm(props) {  
   return (
     <input type={props.type} name={props.name} id={props.id} class="form-control" pattern={props.pattern} minLength={props.minLength} maxLength={props.maxLength} required
-      placeholder={props.placeholder} onChange={props.onChange} onClick={props.onChange}/>
+      placeholder={props.placeholder} onChange={props.onChange} onClick={props.onClick}/>
   );
 }
 
@@ -42,8 +42,9 @@ class UserForm extends React.Component {
     document.getElementById(componenteId).className = "form-control is-"+(invalido?"in":"")+"valid";
   }
 
-  cleanInvalidCSS(){
+  cleanForm(){
     Object.keys(this.state).forEach(key => {
+      document.getElementById(key).value = "";
       document.getElementById(key).className = "form-control";
     });
   }
@@ -117,7 +118,7 @@ class UserForm extends React.Component {
               </div>
               <div class="card-body">
                 <p class="login-box-msg"><b>Cadastrar novo usuário</b></p>
-                <form action="#senha" onSubmit={(e) => this.handleSubmit(e)} onReset={() => this.cleanInvalidCSS()} autoComplete="on" /*method="POST"*/>
+                <form action="#senha" onSubmit={(e) => this.handleSubmit(e)} autoComplete="on" /*method="POST"*/>
                   <div class="input-group mb-3">
                     <InputForm type="text" name="nome" id="nome" pattern="[a-zA-Z\s]+" placeholder="Nome completo" onChange={(e) => this.handleChange(e)}/>
                     <div class="input-group-append">
@@ -178,9 +179,9 @@ class UserForm extends React.Component {
                     </div>
                     <div class="col-6">
                       <div class="col-10 float-right">
-                        <button type="reset" class="btn btn-default btn-block">
+                        <a href="#nome" class="btn btn-default btn-block" onClick={() => this.cleanForm()}>
                           Limpar
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>
