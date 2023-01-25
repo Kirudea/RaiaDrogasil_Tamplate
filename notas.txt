@@ -6,6 +6,8 @@ Fazer/Concertar
     Notificação em pop-up
     Aplicar fluedez nos icones ou trocar
 
+    trocar inputs cpf e nome
+
 ---
 GIT
 

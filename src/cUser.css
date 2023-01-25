@@ -1,0 +1,17 @@
+.content-wrapper {
+  background-color: #eef5f9;
+}
+
+#form {
+  height: 100%;
+  margin: auto;
+  padding: 5% 0%;
+}
+
+.row .col-6 .col-10 {
+  padding: 0;
+}
+
+.input-group-text span {
+  width: 18px;
+}
