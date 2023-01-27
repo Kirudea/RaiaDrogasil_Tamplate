@@ -1,3 +1,31 @@
+.gg-menu {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 18px;
+  height: 90%;
+}
+
+.gg-menu::after,
+.gg-menu::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  height: 3px
+}
+
+.gg-menu::before {
+  width: 25px;
+  background: currentColor;
+  border-radius: 22px;
+  box-shadow: 0 -8px 0,0 -16px 0;
+  bottom: 0
+}
+
+/*-----------*/
+
 .gg-user {
   display: block;
   transform: scale(var(--ggs, 1));

@@ -107,3 +107,8 @@ VALIDAR EMAIL
     
     return resp;
     }
+
+GET
+    let [searchParams, setSearchParams] = useSearchParams();
+
+        alert(searchParams.get("login"));

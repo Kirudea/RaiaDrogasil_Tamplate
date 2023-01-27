@@ -1,13 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "./cUser.css";
+import Logo from "../../img/logo.png"
+import "./index.css";
 
-function InputForm(props) {  
-  return (
-    <input type={props.type} name={props.name} id={props.id} class="form-control" pattern={props.pattern} minLength={props.minLength} maxLength={props.maxLength} required
-      placeholder={props.placeholder} onChange={props.onChange} onClick={props.onClick}/>
-  );
-}
+import NavMenu from "../../components/navmenu";
+import SideBar from "../../components/sidebar";
+import InputForm from "../../components/inputform";
 
 function FormatCPF(cpf) {
   cpf = cpf.substring(0, 14).replace(/[^0-9]/gi, "")
@@ -68,8 +65,11 @@ class UserForm extends React.Component {
       case "senha":
       case "conf_senha":
         event.target.value = event.target.value.trim();
-        this.setInvalidCSS(event.target.id, event.target.value.length < 8);
-        this.setInvalidCSS("conf_senha", event.target.value.length < 8 | (event.target.value !== this.state.senha & event.target.value !== this.state.conf_senha));
+        var senhas = {senha: this.state.senha, conf_senha: this.state.conf_senha};
+        senhas[event.target.name] = event.target.value;
+        
+        this.setInvalidCSS("senha", senhas["senha"] < 8);
+        this.setInvalidCSS("conf_senha", senhas["conf_senha"] < 8 | senhas["senha"] !== senhas["conf_senha"]);
         break
         
       default:
@@ -88,29 +88,14 @@ class UserForm extends React.Component {
   render() {
     return (
       <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="#sidebar" id="sidebar-btt" class="nav-link" role="button">
-                <b>SIDE BAR</b>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#nome" class="nav-link" role="button">
-                <b>FOCAR</b>
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <aside id="sidebar" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
-        
+        <NavMenu/>
+        <SideBar/>
         <div class="content-wrapper">
           <div class="register-box" id="form">
             <div class="card card-outline card-primary">
               <div class="card-header text-center">
                 <a href="/" class="h1">
-                  <img id="logo" src="img/logo.png" alt="LOGO" width="30%"/>
+                  <img id="logo" src={Logo} alt="LOGO" width="30%"/>
                 </a>
                 <div>
                   <h3>Auditoria FP</h3>
@@ -195,5 +180,4 @@ class UserForm extends React.Component {
   }
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<UserForm />);
+export default UserForm;
