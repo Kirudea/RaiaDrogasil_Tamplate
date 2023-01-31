@@ -2,7 +2,7 @@ import "global.css"
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 
 import Login from "pages/login"
-import ForgotForm from "pages/forgot"
+import ForgotForm from "pages/login/forgot"
 import Home from "pages/home"
 import ListUsers from "pages/user/list"
 import CreateUser from "pages/user/create"
