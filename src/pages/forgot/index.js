@@ -1,7 +1,7 @@
 import React from "react";
-import Logo from '../../img/logo.png';
+import Logo from "img/logo.png";
 
-import InputForm from "../../components/inputform";
+import InputForm from "components/inputform";
 
 class ForgotForm extends React.Component {
     render(){

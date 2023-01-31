@@ -1,0 +1,12 @@
+/* Remove função de mostrar senha nativa do navegador */
+input::-ms-reveal, input::-ms-clear {
+    display: none;
+}
+
+.valid_border, .valid_border:focus {
+    border-color: #28a745;
+}
+
+.invalid_border, .invalid_border:focus {
+    border-color: #dc3545;
+}

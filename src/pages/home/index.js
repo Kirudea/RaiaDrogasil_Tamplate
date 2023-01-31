@@ -1,5 +1,5 @@
-import NavMenu from "../../components/navmenu";
-import SideBar from "../../components/sidebar";
+import NavMenu from "components/navmenu";
+import SideBar from "components/sidebar";
 function Home(){
     return(
         <div class="wrapper">

@@ -1,10 +1,10 @@
 import React from "react";
-import Logo from "../../img/logo.png"
+import Logo from "img/logo.png"
 import "./index.css";
 
-import NavMenu from "../../components/navmenu";
-import SideBar from "../../components/sidebar";
-import InputForm from "../../components/inputform";
+import NavMenu from "components/navmenu";
+import SideBar from "components/sidebar";
+import InputForm from "components/inputform";
 
 function FormatCPF(cpf) {
   cpf = cpf.substring(0, 14).replace(/[^0-9]/gi, "")
@@ -27,8 +27,8 @@ class UserForm extends React.Component {
       nome: null,
       email: null,
       cpf: null,
-      senha: null,
-      conf_senha: null,
+      senha: "",
+      conf_senha: "",
     }
     
     this.handleChange = this.handleChange.bind(this);
@@ -36,7 +36,10 @@ class UserForm extends React.Component {
   }
 
   setInvalidCSS(componenteId, invalido){
-    document.getElementById(componenteId).className = "form-control is-"+(invalido?"in":"")+"valid";
+    document.getElementById(componenteId).className = "form-control "+(invalido?"invalid_border":"valid_border");
+    return;
+    //AdminLTE 3
+    //document.getElementById(componenteId).className = "form-control "+(invalido?"is-invalid":"is-valid");
   }
 
   cleanForm(){
@@ -68,8 +71,8 @@ class UserForm extends React.Component {
         var senhas = {senha: this.state.senha, conf_senha: this.state.conf_senha};
         senhas[event.target.name] = event.target.value;
         
-        this.setInvalidCSS("senha", senhas["senha"] < 8);
-        this.setInvalidCSS("conf_senha", senhas["conf_senha"] < 8 | senhas["senha"] !== senhas["conf_senha"]);
+        this.setInvalidCSS("senha", senhas["senha"].length < 8);
+        this.setInvalidCSS("conf_senha", senhas["conf_senha"].length < 8 | senhas["senha"] !== senhas["conf_senha"]);
         break
         
       default:

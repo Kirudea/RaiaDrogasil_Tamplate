@@ -4,8 +4,10 @@
 ## Step 2: Obtenha as dependências
 ### NPM:
     npm install, npm ins ou npm i 
-
-## Step 3: Inicie a aplicação
+## Step 3: Importe as pastas dist e plugins do AdminLTE
+    node_modules/admin-lte/dist -> public/dist
+    node_modules/admin-lte/plugins -> public/plugins
+## Step 4: Inicie a aplicação
     npm start
 
 ---

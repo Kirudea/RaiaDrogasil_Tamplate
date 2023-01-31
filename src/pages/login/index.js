@@ -1,8 +1,8 @@
 import React from "react";
-import Logo from '../../img/logo.png';
+import Logo from "img/logo.png";
 import "./index.css";
 
-import InputForm from "../../components/inputform";
+import InputForm from "components/inputform";
 
 class LoginForm extends React.Component {
     constructor(props){

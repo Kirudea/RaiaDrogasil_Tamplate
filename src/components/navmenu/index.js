@@ -4,7 +4,7 @@ function NavMenu(){
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a href="#sidebar" id="sidebar-btt" class="nav-link" role="button">
-                        <i class="gg-menu"/>
+                        <i class="fas fa-bars"/>
                     </a>
                 </li>
                 <li>

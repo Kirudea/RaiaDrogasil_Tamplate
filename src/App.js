@@ -1,11 +1,11 @@
-import "./global.css"
+import "global.css"
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 
-import Login from "./pages/login"
-import ForgotForm from "./pages/forgot"
-import Home from "./pages/home"
-import ListUsers from "./pages/list-users"
-import CreateUser from "./pages/create-user"
+import Login from "pages/login"
+import ForgotForm from "pages/forgot"
+import Home from "pages/home"
+import ListUsers from "pages/user/list"
+import CreateUser from "pages/user/create"
 
 function App(){
     return(
