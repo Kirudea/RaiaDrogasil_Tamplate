@@ -7,7 +7,7 @@ Fazer/Concertar
     Aplicar fluedez nos icones ou trocar
 
     trocar inputs cpf e nome
-    concertar botão de revelar senha em cadastro
+    Usar class ou function
 
 ---
 GIT
